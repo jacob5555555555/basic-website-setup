@@ -96,13 +96,13 @@ define(["scripts/gameManager"], function(gameManager){
             }
           }
         }),
-        subtract: function(){
+        subtract: game.ifPlaying(function(){
             if(canSubtract()){
               for (var resource in results){
                 gameState[resource] -= results[resource];
               }
             }
-        },
+        }),
         cost: cost,
         canAdd: canAdd,
         canSubtract: canSubtract

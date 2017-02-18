@@ -46,7 +46,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function update(){
     for (var i = 0; i < buttonData.length; ++i){
       var data = buttonData[i];
-      data.html.style.opacity = data.description.canAdd() || data.description.canSubtract()? 1.0: 0.3;
+      data.html.style.opacity = data.description.canAdd() && data.description.canSubtract()? 1.0: 0.3;
       data.subtractButton.disabled = !data.description.canSubtract();
       data.button.disabled = !data.description.canAdd();
     }
