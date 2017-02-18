@@ -95,6 +95,19 @@ define(["scripts/gameManager"], function(gameManager){
     var buttons = {
       hire_lumberjack: makeButton({energy: 5}, function(){gameState.lumberJacks++}),
       fire_lumberjack: makeButton({lumberJacks: 1}, function(){}),
+      buy_furnace: makeButton({energy: 50},function(){gameState.furnaces++}),
+      destroy_furnace: makeButton({furnaces: 1},function(){}),
+      buy_coalmine: makeButton({energy: 1000, wood: 500},function(){gameState.coalmines++}),
+      destroy_coalmine: makeButton({coalmines: 1},function(){}),
+      buy_coalplant: makeButton({energy: 2500, wood: 1000},function(){gameState.coalplants++}),
+      destroy_coalplant: makeButton({coalplants: 1},function(){}),
+      buy_oremine: makeButton({energy: 5000, wood: 2000},function(){gameState.oremines++}),
+      destroy_oremine: makeButton({oremines: 1},function(){}),
+      buy_smelter: makeButton({energy: 10000, wood:2500},function(){gameState.smelters++}),
+      destroy_smelter: makeButton({smelters: 1},function(){}),
+      buy_solar: makeButton({metal: 2000},function(){gameState.solar++}),
+      destroy_solar: makeButton({solar: 1},function(){}),
+
       /*
       buy_furnace: game.ifPlaying(function(){
         if(gameState.energy>fuec){
