@@ -144,7 +144,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       var pb= pomc / (pomc+datum.pollution);
       pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
       td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw;
-      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-(1-Math.pow(pb,.5))*datum.energy;
+      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-(1-Math.pow(pb,.1))*datum.energy;
       wd=ljw*ljtu-fuw;
       cmd=-cmw*cmcg;
       crd=cmw*cmcg-cpw-smcu*smw;
