@@ -6,7 +6,7 @@ define(["scripts/gameManager"], function(gameManager){
     var ljeu= 1;
     var ljtu =5;
     var tuwg=1;
-    var trgc = .00000001;
+    var trgc = .0000000001;
     var trmc = 100000000;
     var fuec = 50;
     var fueg = 1;
@@ -96,13 +96,13 @@ define(["scripts/gameManager"], function(gameManager){
             }
           }
         }),
-        subtract: game.ifPlaying(function(){
+        subtract: function(){
             if(canSubtract()){
               for (var resource in results){
                 gameState[resource] -= results[resource];
               }
             }
-        }),
+        },
         cost: cost,
         canAdd: canAdd,
         canSubtract: canSubtract
@@ -119,14 +119,12 @@ define(["scripts/gameManager"], function(gameManager){
       buy_oremine: makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
       buy_smelter: makeButton({energy: 10000, wood:2500}, {smelters: 1}),
       buy_solar: makeButton({metal: 2000}, {solar: 1})
-
     }
 
     //actually running it
     left.setup(buttons);
 
-    function loop(){
-      //logic
+    function logicmath(datum){
       var ed=0;
       var td=0;
       var wd=0;
@@ -136,36 +134,51 @@ define(["scripts/gameManager"], function(gameManager){
       var md=0;
       var omd=0;
       var ord=0;
-      var ljw = Math.min(gameState.trees,gameState.lumberJacks*ljtu)/ljtu;
-      var fuw = Math.min(gameState.wood,gameState.furnaces*fuwu);
-      var cmw = Math.min(gameState.coal,gameState.coalmines*cmcg)/cmcg;
-      var cpw = Math.min(gameState.coalreserves,gameState.coalplants*cpcu);
-      var omw = Math.min(gameState.ore,gameState.oremines*omog)/omog;
-      var smw = Math.min(gameState.orereserves,Math.min(gameState.coalreserves,gameState.smelters*smcu)*smou/smcu)/smou;
-      var tf= tico*Math.pow(gameState.time,1.25);
-      var pb= pomc / (pomc+gameState.pollution);
-      pd= gameState.coalmines*cmpg + gameState.coalplants*cppg+ gameState.furnaces*fupg +gameState.oremines*ompg+ gameState.smelters*smpg- podc*gameState.pollution;
-      td=trgc*gameState.trees*( trmc*pb -gameState.trees)-ljw;
-      ed = fuw*fueg+cpw*cpeg+soeg*gameState.solar*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu;
+      var ljw = Math.min(datum.trees,datum.lumberJacks*ljtu)/ljtu;
+      var fuw = Math.min(datum.wood,datum.furnaces*fuwu);
+      var cmw = Math.min(datum.coal,datum.coalmines*cmcg)/cmcg;
+      var cpw = Math.min(datum.coalreserves,datum.coalplants*cpcu);
+      var omw = Math.min(datum.ore,datum.oremines*omog)/omog;
+      var smw = Math.min(datum.orereserves,Math.min(datum.coalreserves,datum.smelters*smcu)*smou/smcu)/smou;
+      var tf= tico*Math.pow(datum.time,1.25);
+      var pb= pomc / (pomc+datum.pollution);
+      pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
+      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw;
+      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu;
       wd=ljw*ljtu-fuw;
       cmd=-cmw*cmcg;
       crd=cmw*cmcg-cpw-smcu*smw;
       omd=-omog*omw;
       ord=omog*omw- smou*smw;
       md= smw*smmg;
-      gameState.energy+=ed;
-      gameState.wood+=wd;
-      gameState.trees+=td;
-      gameState.time++;
-      gameState.pollution+=pd;
-      gameState.coalreserves+=crd;
-      gameState.coal+=cmd;
-      gameState.ore+=omd;
-      gameState.orereserves+=ord;
-      gameState.metal+=md;
-      //update right
+      datum.energy+=ed;
+      datum.wood+=wd;
+      datum.trees+=td;
+      datum.time++;
+      datum.pollution+=pd;
+      datum.coalreserves+=crd;
+      datum.coal+=cmd;
+      datum.ore+=omd;
+      datum.orereserves+=ord;
+      datum.metal+=md;
+    }
+    function calc(stat){
+      var state={};
+      for( key in stat){
+        state[key]=stat[key];
+      }
+      for(var i =0;i<50000;i++){
+        logicmath(state)
+      }
+      return state;
+    }
 
-      right.update(gameState,pomc);
+    function loop(){
+      //logic
+      logicmath(gameState);
+      //update right
+      var finalres= calc(gameState);
+      right.update(gameState,pomc,finalres);
 
       left.update();
     }

@@ -14,7 +14,7 @@ define(["scripts/libs/only"], function(only){
       return bar
   }
 
-    function rightColumn(state, poln) {
+    function rightColumn(state, poln,finstate) {
         var data = [];
 
         var myProgress = {
@@ -30,12 +30,16 @@ define(["scripts/libs/only"], function(only){
         for (var key in state) {
             var dat;
             if (key == "pollution") {
-                dat = only.html({p: key + ": " + (1 - poln / (state[key] + poln ))});
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln ))+"("+new Intl.NumberFormat('en-US', { maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln ))+")"});
             }
-            else {
-                dat = only.html({p: key + ": " + state[key]});
+            else if (key=="trees"){
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(state[key]) +"("+ new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(finstate[key])+")" });
+            } else {
+              dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(state[key])  });
             }
-            data.push(dat);
+            if(state[key]!=0 || key=="trees"){
+              data.push(dat);
+          }
             var barPercent;
             if (key == "trees") {
                 barPercent = (state[key]) / 100000000
