@@ -1,7 +1,7 @@
-define(["scripts/libs/only","scripts/htmlUtils", "scripts/leftColumn"], function(only,htmlUtils,leftColumn){
+define(["scripts/libs/only","scripts/htmlUtils", "scripts/leftColumn","scripts/center"], function(only,htmlUtils,leftColumn,center){
   function displayGame(left, right){
     var col1 = left;
-    var col2 = {div: [{img: "", src:"images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"}]}
+    var col2 = center.draw("s");
     var col3 = right;
     only.setHtml([
       {title: "Sustainable NYUS"},

@@ -108,66 +108,6 @@ define(["scripts/gameManager"], function(gameManager){
       buy_solar: makeButton({metal: 2000},function(){gameState.solar++}),
       destroy_solar: makeButton({solar: 1},function(){}),
 
-      /*
-      buy_furnace: game.ifPlaying(function(){
-        if(gameState.energy>fuec){
-          gameState.furnaces++;
-          gameState.energy-=fuec;
-        }
-      }),
-      destroy_furnace: game.ifPlaying(function(){
-        gameState.furnaces--;
-      }),
-      buy_coalmine: game.ifPlaying(function(){
-        if(gameState.energy>cmec && gameState.wood>cmwc){
-          gameState.coalmines++;
-          gameState.energy-=cmec;
-          gameState.wood-=cmwc;
-        }
-      }),
-      destroy_coalmine: game.ifPlaying(function(){
-        gameState.coalmines--;
-      }),
-      buy_coalplant: game.ifPlaying(function(){
-        if(gameState.energy>cpec &&gameState.wood> cpwc){
-          gameState.coalplants++;
-          gameState.energy-=cpec;
-          gameState.wood-=cpwc;
-        }
-      }),
-      destroy_coalplant: game.ifPlaying(function(){
-        gameState.coalplants--;
-      }),
-      buy_oremine: game.ifPlaying(function(){
-        if(gameState.energy>omec &&gameState.wood> omwc){
-          gameState.oremines++;
-          gameState.energy-=omec;
-          gameState.wood-=omwc;
-        }
-      }),
-      destroy_oremine: game.ifPlaying(function(){
-        gameState.oremines--;
-      }),
-      buy_smelter: game.ifPlaying(function(){
-        if(gameState.energy>smec &&gameState.wood> smwc){
-          gameState.smelters++;
-          gameState.energy-=smec;
-          gameState.wood-=smwc;
-        }
-      }),
-      destroy_smelter: game.ifPlaying(function(){
-        gameState.smelters--;
-      }),
-      buy_solar: game.ifPlaying(function(){
-        if(gameState.metal>somc ){
-          gameState.solar++;
-          gameState.metal-=somc;
-        }
-      }),
-      destroy_solar: game.ifPlaying(function(){
-        gameState.solar--;
-      })
-      */
     }
 
     //actually running it
@@ -214,7 +154,6 @@ define(["scripts/gameManager"], function(gameManager){
       //update right
 
       right.update(gameState,pomc);
-      console.log(tf)
 
       left.update();
     }
