@@ -112,13 +112,13 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      hire_lumberjack: {description: makeButton({energy: 5}, {lumberJacks: 1}),detail: "a lumberjack turns trees into logs"},
-      buy_furnace: {description: makeButton({energy: 50}, {furnaces: 1}), detail: "a furnace turns logs into energy"},
-      buy_coalmine:  {description: makeButton({energy: 1000, wood: 500}, {coalmines: 1}), detail: "a coal mine extracts coal from the earth"},
-      buy_coalplant:  {description: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
-      buy_oremine:  {description: makeButton({energy: 5000, wood: 2000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
-      buy_smelter:  {description: makeButton({energy: 10000, wood:2500}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
-      buy_solar:  {description: makeButton({metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
+      hire_lumberjack: makeButton({energy: 5}, {lumberJacks: 1}),
+      buy_furnace: makeButton({energy: 50}, {furnaces: 1}),
+      buy_coalmine: makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
+      buy_coalplant: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
+      buy_oremine: makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
+      buy_smelter: makeButton({energy: 10000, wood:2500}, {smelters: 1}),
+      buy_solar: makeButton({metal: 2000}, {solar: 1})
     }
 
     //actually running it
@@ -144,7 +144,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       var pb= pomc / (pomc+datum.pollution);
       pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
       td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw;
-      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-(1-Math.pow(pb,.5))*datum.energy;
+      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-(1-Math.pow(pb,.1))*datum.energy;
       wd=ljw*ljtu-fuw;
       cmd=-cmw*cmcg;
       crd=cmw*cmcg-cpw-smcu*smw;

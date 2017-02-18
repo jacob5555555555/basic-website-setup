@@ -17,6 +17,11 @@ define(["scripts/libs/only"], function (only) {
     function rightColumn(state, poln,finstate) {
         var data = [];
 
+        var categoryTitle = {
+            "text-align" : "center",
+            "font-weight" : "bold"
+        };
+
         var myProgress = {
             "width": "100%",
             "background-color": "#ddd"
@@ -27,31 +32,59 @@ define(["scripts/libs/only"], function (only) {
             "background-color": "#4CAF50"
         };
 
+        var outputs = ["energy", "pollution"];
+        var naturalResources = ["trees", "coalreserves", "orereserves"];
+        var resourcesStockpiled = ["wood", "coal", "ore", "metal"];
+        var resourceCollectors = ["lumberJacks", "coalmines", "oremines"];
+        var outputMachines = ["furnaces","coalplants","smelters","solar"];
+
+        var categoryStrings = [outputs, naturalResources, resourcesStockpiled, resourceCollectors, outputMachines];
+
+        var categories = [[],[],[],[],[]];
+        categories[0].push({p : "Outputs", css: categoryTitle});
+        categories[1].push({p : "Natural Resources", css: categoryTitle});
+        categories[2].push({p : "Resources Stockpiled", css: categoryTitle});
+        categories[3].push({p : "Resource Collectors", css: categoryTitle});
+        categories[4].push({p : "Output Machines", css: categoryTitle});
+
         for (var key in state) {
             var dat;
             if (key == "pollution") {
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln ))+"("+new Intl.NumberFormat('en-US', { maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln ))+")"});
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")"});
+                categories[0].push(dat);
             }
-            else if (key=="trees"){
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(state[key]) +"("+ new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(finstate[key])+")" });
+            else if (key == "trees") {
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")"});
+                categories[1].push(dat);
             } else {
-              dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0}).format(state[key])  });
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key])});
+                for (var i = 0; i < categories.length; ++i) {
+                    if (categoryStrings[i].indexOf(key) != -1) {
+                        categories[i].push(dat);
+                    }
+                }
             }
-            if(state[key]!=0 || key=="trees"){
-              data.push(dat);
-          }
+            //   if(state[key]!=0 || key=="trees"){
+            //     data.push(dat);
+            // }
             var barPercent;
             if (key == "trees") {
-                barPercent = (state[key]) / 100000000
-                data.push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar))
+                barPercent = (state[key]) / 100000000;
+                categories[1].push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar));
             }
             if (key == "pollution") {
                 barPercent = (1 - poln / (state[key] + poln ));
-                data.push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar))
+                categories[0].push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar));
             }
 
         }
-        var final = only.html({div: data});
+        var allDivs = [];
+        for (var i = 0; i < categories.length; ++i) {
+            allDivs.push(only.html({div: categories[i]}));
+        }
+
+
+        var final = only.html({div: allDivs});
         while (html.hasChildNodes()) {
             html.removeChild(html.firstChild);
         }

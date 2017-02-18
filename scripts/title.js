@@ -6,14 +6,12 @@ define(["scripts/libs/only"], function (only) {
     };
 
     var html = only.html({div: []});
-    var timeTag = only.html({p: "Time: " + 0, css: header});
+    var timeTag = only.html({p: "Year: " + 1750, css: header});
     html.appendChild(timeTag);
 
     function title(state) {
 
-
-
-        timeTag.innerHTML = "Time: " + state.time;
+        timeTag.innerHTML = "Year: " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(1750 + state.time / 15) + " C.E.";
 
         // html.appendChild();
 
