@@ -28,19 +28,21 @@ define(["scripts/libs/only"], function(only){
         };
 
         for (var key in state) {
+            var dat;
             if (key == "pollution") {
-                var dat = only.html({p: key + ": " + (1 - poln / (state[key] + poln ))});
+                dat = only.html({p: key + ": " + (1 - poln / (state[key] + poln ))});
             }
             else {
-                var dat = only.html({p: key + ": " + state[key]});
+                dat = only.html({p: key + ": " + state[key]});
             }
             data.push(dat);
+            var barPercent;
             if (key == "trees") {
-                var barPercent = (state[key]) / 100000000
+                barPercent = (state[key]) / 100000000
                 data.push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar))
             }
             if (key == "pollution") {
-                var barPercent = (1 - poln / (state[key] + poln ));
+                barPercent = (1 - poln / (state[key] + poln ));
                 data.push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar))
             }
 
