@@ -1,32 +1,33 @@
 define(["scripts/libs/only","scripts/htmlUtils"], function(only,htmlUtils){
 
-    var energy = only.html([{p: "Energy: 0"}])
-    var pollution = only.html([{p: "Pollution: 0"}])
-    var wood = only.html([{p: "Wood: 0"}])
-    var trees = only.html([{p: "Trees: 0"}])
+    var energy = only.html({p: "Energy: 0"})
+    var pollution = only.html({p: "Pollution: 0"})
+    var wood = only.html({p: "Wood: 0"})
+    var trees = only.html({p: "Trees: 0"})
 
-    var html = only.html([
+    var html = only.html({
+      div: [
         energy,
         pollution,
         wood,
         trees
-
-    ])
+      ]
+    });
 
     function setEnergy(energyNum) {
-        energy = only.html([{p: "Energy: " + energyNum}])
+        energy.innerHTML = "Energy: " + energyNum;
     }
 
     function setPollution(pollutionNum) {
-        pollution = only.html([{p: "Pollution: " + pollutionNum}])
+        pollution.innerHTML = "Pollution: " + pollutionNum;
     }
 
     function setWood(woodNum) {
-        wood = only.html([{p: "Wood: " + woodNum}])
+        wood.innerHTML = "Wood: " + woodNum;
     }
 
     function setTrees(treesNum) {
-        trees = only.html([{p: "Trees: " + treesNum}])
+        trees.innerHTML = "Trees: " + treesNum;
     }
 
     return {
@@ -37,4 +38,3 @@ define(["scripts/libs/only","scripts/htmlUtils"], function(only,htmlUtils){
         setTrees: setTrees
     }
 })
-

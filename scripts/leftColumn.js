@@ -1,4 +1,5 @@
 define(["scripts/libs/only"], function(only){
+  var html = only.html({div: []});
   function leftColumn(buttonObject){
     var buttons = [];
     for (var key in buttonObject){
@@ -6,11 +7,12 @@ define(["scripts/libs/only"], function(only){
       button.addEventListener("click",buttonObject[key]);
       buttons.push(button);
     }
-    var final = {div: buttons};
-    return final;
+    var final = only.html({div: buttons});
+    html.appendChild(final);
   }
 
   return {
-    leftColumn: leftColumn
+    html:html,
+    onClicks: leftColumn
   }
 })
