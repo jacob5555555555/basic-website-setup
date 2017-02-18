@@ -1,9 +1,10 @@
 define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
-  function makeButton(name, description){
+  function makeButton(name, description,detail){
     var button = only.html({button: name, css: {display: "block"}});
     var subtract = only.html({button: "-"})
     button.addEventListener("click",description.add);
     subtract.addEventListener("click", description.subtract);
+    button.title=detail;
 
     var cost = "";
     for (var resource in description.cost){
@@ -31,8 +32,9 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function setup(buttonObject){
     var buttons = [];
     for (var key in buttonObject){
-      var description = buttonObject[key];
-      var data = makeButton(key, description);
+      var description = buttonObject[key].description;
+      var detail = buttonObject[key].detail;
+      var data = makeButton(key, description,detail);
       buttons.push(data.html);
       buttonData.push(data)
     }
