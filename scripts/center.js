@@ -1,9 +1,34 @@
 define(["scripts/libs/only"], function(only){
+  //html pieces
   var earth = only.html({img: "", src: "images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"});
   var tree = only.html({img: "", src: "images/tree.png"})
 
   var canvas = only.html({canvas: ""});
   var ctx = canvas.getContext("2d");
+
+  function makeSpriteDrawer(image, maximum){
+    var count = 0;
+    var locations = [];
+
+    return {
+      setDensity: function(density){
+        count = Math.ceil(density * maximum);
+        if (count < locations.length){
+          locations = locations.slice(0, count);
+        } else if (count > locations.length){
+          for (var i = 0; i < (count - locations.length); ++i){
+            locations.push(Math.random() * Math.PI * 2);
+          }
+        }
+      },
+      draw: function(){
+        locations.forEach(function(angle){
+          drawAroundEarth(image, angle);
+        })
+      }
+    }
+  }
+  var trees = makeSpriteDrawer(tree, 20);
 
   /*dimentions looks like:
   {x: centerX, y: centerY, width: proportionWidth, height: proportionHeight, angle: angle}*/
@@ -32,7 +57,6 @@ define(["scripts/libs/only"], function(only){
     })
   }
 
-  var angle = 0.0;
   function update(state) {
     var height = canvas.parentNode.offsetHeight - 10;
     var width = canvas.parentNode.offsetWidth - 10;
@@ -43,14 +67,13 @@ define(["scripts/libs/only"], function(only){
     }
     ctx.clearRect(0,0, canvas.width, canvas.height);
 
-    console.log(angle)
     drawImage(earth, {
-      x: .5, y:.5, width: 1, height: 1, angle: angle
+      x: .5, y:.5, width: 1, height: 1, angle: 0
     })
-    for (var i = 0; i < 10; ++i){
-      drawAroundEarth(tree, angle + i);
-    }
-    angle += .01;
+
+    trees.setDensity(state.trees / 100000000);
+    trees.draw();
+
   }
   return {
     html: canvas,

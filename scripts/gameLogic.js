@@ -181,7 +181,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       right.update(gameState,pomc,finalres);
       title.update(gameState);
       left.update();
-      center.update();
+      center.update(gameState);
     }
 
 
