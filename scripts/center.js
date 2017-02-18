@@ -9,21 +9,33 @@ define(["scripts/libs/only"], function(only){
   function drawImage(image, dimentions){
     var pixelsWide = dimentions.width * canvas.width;
     var pixelsTall = dimentions.height * canvas.height;
-    var pixelsToCenterX = dimentions.centerX * canvas.width;
-    var pixelsToCenterY = dimentions.centerY * canvas.height;
+    var pixelsToCenterX = dimentions.x * canvas.width;
+    var pixelsToCenterY = dimentions.y * canvas.height;
+    var h = pixelsTall, w = pixelsWide, angle = dimentions.angle;
 
-    ctx.drawImage(image, pixelsToCenterX - pixelsWide/2,
-      pixelsToCenterY - pixelsTall/2,
-      pixelsWide, pixelsTall);
+    var offsetX = (w/2)*Math.cos(angle + Math.PI/2) + (w/2)*Math.cos(angle - Math.PI);
+    var offsetY = (h/2)*Math.sin(angle + Math.PI/2) + (h/2)*Math.sin(angle - Math.PI);
+
+    console.log(offsetX, " " , offsetY)
+
+    var x = pixelsToCenterX + offsetX;
+    var y = pixelsToCenterY - offsetY;
+
+    ctx.translate(x,y);
+    ctx.rotate(dimentions.angle)
+    //ctx.drawImage(image, 0, 0, pixelsWide, pixelsTall);
+    ctx.drawImage(image, 0, 0, 10, 10);
   }
 
+  var angle = 0.0;
   function update(state) {
     canvas.height = canvas.parentNode.offsetHeight - 10;
     canvas.width = canvas.parentNode.offsetWidth - 10;
 
     drawImage(earth, {
-      x: .5, y:.5, width: .3, height: .3
+      x: .5, y:.5, width: 1, height: 1, angle: angle
     })
+    angle += .01;
   }
   return {
     html: canvas,
