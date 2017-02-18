@@ -189,7 +189,7 @@ define(["scripts/gameManager"], function(gameManager){
       var cmw = Math.min(gameState.coal,gameState.coalmines*cmcg)/cmcg;
       var cpw = Math.min(gameState.coalreserves,gameState.coalplants*cpcu);
       var omw = Math.min(gameState.ore,gameState.oremines*omog)/omog;
-      var smw = Math.min(gameState.orereserves,gameState.smelters*smou)/smou;
+      var smw = Math.min(gameState.orereserves,Math.min(gameState.coalreserves,gameState.smelters*smcu)*smou/smcu)/smou;
       var tf= tico*Math.pow(gameState.time,1.25);
       var pb= pomc / (pomc+gameState.pollution);
       pd= gameState.coalmines*cmpg + gameState.coalplants*cppg+ gameState.furnaces*fupg +gameState.oremines*ompg+ gameState.smelters*smpg- podc*gameState.pollution;
