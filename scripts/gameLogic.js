@@ -45,8 +45,8 @@ define(["scripts/gameManager"], function(gameManager){
       pollution: 0,
       energy: 100,
       trees: 100000000,
-      coal: 1000000,
-      ore: 1000000,
+      coal: 100000,
+      ore: 100000,
       wood: 0,
       coalreserves:0,
       orereserves:0,
@@ -174,7 +174,7 @@ define(["scripts/gameManager"], function(gameManager){
       gameState.orereserves+=ord;
       gameState.metal+=md;
       //update right
-      
+
       right.update(gameState,pomc);
       console.log(tf)
 
