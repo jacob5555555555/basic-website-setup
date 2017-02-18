@@ -1,9 +1,4 @@
-define(["scripts/libs/only"], function(only){
+define(["scripts/libs/only","scripts/maingame"], function(only,maingame){
 
-
-  only.setHtml([
-    {p: "Loaded onlyjs stuff!"},
-    {p: "Wow I am a cool kid!"}
-  ]);
 })
 /*hi!*/
