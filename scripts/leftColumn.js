@@ -4,12 +4,20 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
     var subtract = only.html({button: "-"})
     button.addEventListener("click",description.add);
     subtract.addEventListener("click", description.subtract);
+
+    var cost = "";
+    for (var resource in description.cost){
+      cost += description.cost[resource] + " ";
+      cost += resource + ", ";
+    }
+    cost = cost.slice(0, cost.length-2);
+
     return {
       html: htmlUtils.spacedColumns([
         button,
         subtract,
-        {p: "Cost: " + JSON.stringify(description.cost)}
-      ], [.5, .5]),
+        {p: [{font: cost, size:"2"}]}
+      ], [.4, .1, .5]),
       description: description,
       button: button,
       subtractButton: subtract
@@ -38,8 +46,9 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function update(){
     for (var i = 0; i < buttonData.length; ++i){
       var data = buttonData[i];
-      data.html.hidden = !data.description.canAdd();
+      data.html.style.opacity = data.description.canAdd() || data.description.canSubtract()? 1.0: 0.3;
       data.subtractButton.disabled = !data.description.canSubtract();
+      data.button.disabled = !data.description.canAdd();
     }
   }
 
