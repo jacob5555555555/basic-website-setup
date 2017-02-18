@@ -66,47 +66,59 @@ define(["scripts/gameManager"], function(gameManager){
     {
       energy: 10, wood: 100
     }
+    results is a similar object of what gets added
     */
-    function makeButton(cost, action){
-      function canAfford(){
-        var canAfford = true;
+    function makeButton(cost, results){
+      function canAdd(){
         for (var resource in cost){
           if (gameState[resource] < cost[resource]){
-            canAfford = false;
+            return false;
           }
         }
-        return canAfford;
+        return true;
+      }
+      function canSubtract(){
+        for (var resource in results){
+          if (gameState[resource] < results[resource]){
+            return false
+          }
+        }
+        return true;
       }
       return {
-        callback: game.ifPlaying(function(){
-          if (canAfford()){
+        add: game.ifPlaying(function(){
+          if (canAdd()){
             for (var resource in cost){
               gameState[resource] -= cost[resource];
             }
-            action();
+            for (var resource in results){
+              gameState[resource] += results[resource]
+            }
           }
         }),
+        subtract: function(){
+            if(canSubtract()){
+              for (var resource in results){
+                gameState[resource] -= results[resource];
+              }
+            }
+        },
         cost: cost,
-        canAfford: canAfford
+        canAdd: canAdd,
+        canSubtract: canSubtract
       };
     }
 
-
     var buttons = {
-      hire_lumberjack: makeButton({energy: 5}, function(){gameState.lumberJacks++}),
-      fire_lumberjack: makeButton({lumberJacks: 1}, function(){}),
-      buy_furnace: makeButton({energy: 50},function(){gameState.furnaces++}),
-      destroy_furnace: makeButton({furnaces: 1},function(){}),
-      buy_coalmine: makeButton({energy: 1000, wood: 500},function(){gameState.coalmines++}),
-      destroy_coalmine: makeButton({coalmines: 1},function(){}),
-      buy_coalplant: makeButton({energy: 2500, wood: 1000},function(){gameState.coalplants++}),
-      destroy_coalplant: makeButton({coalplants: 1},function(){}),
-      buy_oremine: makeButton({energy: 5000, wood: 2000},function(){gameState.oremines++}),
-      destroy_oremine: makeButton({oremines: 1},function(){}),
-      buy_smelter: makeButton({energy: 10000, wood:2500},function(){gameState.smelters++}),
-      destroy_smelter: makeButton({smelters: 1},function(){}),
-      buy_solar: makeButton({metal: 2000},function(){gameState.solar++}),
-      destroy_solar: makeButton({solar: 1},function(){}),
+
+
+      hire_lumberjack: makeButton({energy: 5}, {lumberJacks: 1}),
+      buy_furnace: makeButton({energy: 50}, {furnaces: 1}),
+      buy_coalmine: makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
+      buy_coalplant: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
+      buy_oremine: makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
+      buy_smelter: makeButton({energy: 10000, wood:2500}, {smelters: 1}),
+      buy_solar: makeButton({metal: 2000}, {solar: 1})
 
     }
 
