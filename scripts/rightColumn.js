@@ -57,7 +57,10 @@ define(["scripts/libs/only"], function (only) {
                 dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")"});
                 categories[1].push(dat);
             } else {
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key])});
+                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
+                  css: {
+                    margin: "0px"
+                  }});
                 for (var i = 0; i < categories.length; ++i) {
                     if (categoryStrings[i].indexOf(key) != -1) {
                         categories[i].push(dat);

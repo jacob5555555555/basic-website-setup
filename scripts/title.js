@@ -2,7 +2,8 @@ define(["scripts/libs/only"], function (only) {
 
     var header = {
         "text-align": "center",
-        "font-size": "30px"
+        "font-size": "30px",
+        margin: "0px"
     };
 
     var html = only.html({div: []});
