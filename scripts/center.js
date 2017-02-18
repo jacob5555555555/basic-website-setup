@@ -1,5 +1,6 @@
 define(["scripts/libs/only"], function(only){
   var earth = only.html({img: "", src: "images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"});
+  var tree = only.html({img: "", src: "images/tree.png"})
 
   var canvas = only.html({canvas: ""});
   var ctx = canvas.getContext("2d");
@@ -19,7 +20,16 @@ define(["scripts/libs/only"], function(only){
     ctx.drawImage( image, 0, 0 , pixelsWide, pixelsTall);
     ctx.restore();
 
-    ctx.drawImage(image, 0, 0, 10, 10);
+  }
+
+  function drawAroundEarth(image, angle){
+    drawImage(image, {
+      x: .5 + .4 * Math.cos(angle),
+      y: .5 + .4 * Math.sin(angle),
+      width: .1,
+      height: .1,
+      angle: angle + Math.PI/2
+    })
   }
 
   var angle = 0.0;
@@ -27,12 +37,19 @@ define(["scripts/libs/only"], function(only){
     var height = canvas.parentNode.offsetHeight - 10;
     var width = canvas.parentNode.offsetWidth - 10;
     var better = Math.min(height, width);
-    canvas.height = better;
-    canvas.width = better;
+    if (canvas.height != better || canvas.width != better){
+      canvas.height = better;
+      canvas.width = better;
+    }
+    ctx.clearRect(0,0, canvas.width, canvas.height);
 
+    console.log(angle)
     drawImage(earth, {
       x: .5, y:.5, width: 1, height: 1, angle: angle
     })
+    for (var i = 0; i < 10; ++i){
+      drawAroundEarth(tree, angle + i);
+    }
     angle += .01;
   }
   return {
