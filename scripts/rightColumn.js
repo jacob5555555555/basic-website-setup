@@ -1,40 +1,24 @@
-define(["scripts/libs/only","scripts/htmlUtils"], function(only,htmlUtils){
-
-    var energy = only.html({p: "Energy: 0"})
-    var pollution = only.html({p: "Pollution: 0"})
-    var wood = only.html({p: "Wood: 0"})
-    var trees = only.html({p: "Trees: 0"})
-
-    var html = only.html({
-      div: [
-        energy,
-        pollution,
-        wood,
-        trees
-      ]
-    });
-
-    function setEnergy(energyNum) {
-        energy.innerHTML = "Energy: " + energyNum;
+define(["scripts/libs/only"], function(only){
+  var html = only.html({div: []});
+  function rightColumn(state,poln){
+    var data = [];
+    for (var key in state){
+      if (key != "pollution"){
+        var dat = only.html({p: key+": "+state[key] });
+      }else {
+        var dat = only.html({p: key+": "+ (1-poln/(state[key]+poln ))}  );
+      }
+      data.push(dat);
     }
-
-    function setPollution(pollutionNum) {
-        pollution.innerHTML = "Pollution: " + pollutionNum;
+    var final = only.html({div: data});
+    while(html.hasChildNodes()){
+      html.removeChild(html.firstChild);
     }
+    html.appendChild(final);
+  }
 
-    function setWood(woodNum) {
-        wood.innerHTML = "Wood: " + woodNum;
-    }
-
-    function setTrees(treesNum) {
-        trees.innerHTML = "Trees: " + treesNum;
-    }
-
-    return {
-        html: html,
-        setPollution: setPollution,
-        setEnergy: setEnergy,
-        setWood: setWood,
-        setTrees: setTrees
-    }
+  return {
+    html:html,
+    update: rightColumn
+  }
 })

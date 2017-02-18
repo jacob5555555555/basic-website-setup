@@ -1,7 +1,7 @@
 define([], function(){
 function makeGameManager(){
     //constants:
-    var TICK_TIME = 50;//millis
+    var TICK_TIME = 100;//millis
 
 
     var playing = false;
