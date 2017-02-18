@@ -1,18 +1,18 @@
-define(["scripts/libs/only"], function(only){
-  var html = only.html({div: []});
+define(["scripts/libs/only"], function (only) {
+    var html = only.html({div: []});
 
-  function makeProgessBar(value, threshold, precolor, postcolor, myProgress, myBar) {
-      var barWidth = 100 * value
-      myBar.width = barWidth + '%';
-      if (barWidth < threshold) {
-          myBar.backgroundColor = precolor;
-      }
-      else {
-          myBar.backgroundColor = postcolor;
-      }
-      var bar = only.html({div: [{p: ""}, {div: [], css: myBar}], css: myProgress});
-      return bar
-  }
+    function makeProgessBar(value, threshold, precolor, postcolor, myProgress, myBar) {
+        var barWidth = 100 * value
+        myBar.width = barWidth + '%';
+        if (barWidth < threshold) {
+            myBar.backgroundColor = precolor;
+        }
+        else {
+            myBar.backgroundColor = postcolor;
+        }
+        var bar = only.html({div: [{p: ""}, {div: [], css: myBar}], css: myProgress});
+        return bar
+    }
 
     function rightColumn(state, poln,finstate) {
         var data = [];
@@ -50,16 +50,16 @@ define(["scripts/libs/only"], function(only){
                 data.push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar))
             }
 
+        }
+        var final = only.html({div: data});
+        while (html.hasChildNodes()) {
+            html.removeChild(html.firstChild);
+        }
+        html.appendChild(final);
     }
-    var final = only.html({div: data});
-    while(html.hasChildNodes()){
-      html.removeChild(html.firstChild);
-    }
-    html.appendChild(final);
-  }
 
-  return {
-    html:html,
-    update: rightColumn
-  }
+    return {
+        html: html,
+        update: rightColumn
+    }
 })
