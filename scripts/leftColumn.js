@@ -13,7 +13,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
       button.addEventListener("click",description.callback);
       buttons.push(div);
       buttonData.push({
-        button: button, description: description
+        button: div, description: description
       })
     }
     var final = only.html({div: buttons});
@@ -26,7 +26,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function update(){
     for (var i = 0; i < buttonData.length; ++i){
       var data = buttonData[i];
-      data.button.disabled = !data.description.canAfford();
+      data.button.hidden = !data.description.canAfford();
     }
   }
 
