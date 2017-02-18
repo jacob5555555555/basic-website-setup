@@ -1,7 +1,7 @@
 define(["scripts/gameManager"], function(gameManager){
 
   //static game logic
-  function runLogic(right, left){
+  function runLogic(title, right, left){
     var ljec= 5;
     var ljeu= 1;
     var ljtu =5;
@@ -179,7 +179,7 @@ define(["scripts/gameManager"], function(gameManager){
       //update right
       var finalres= calc(gameState);
       right.update(gameState,pomc,finalres);
-
+      title.update(gameState);
       left.update();
     }
 
