@@ -1,4 +1,4 @@
-define(["scripts/gameManager"], function(gameManager){
+define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
 
   //static game logic
   function runLogic(right, left){
@@ -179,8 +179,8 @@ define(["scripts/gameManager"], function(gameManager){
       //update right
       var finalres= calc(gameState);
       right.update(gameState,pomc,finalres);
-
       left.update();
+      center.update();
     }
 
 
