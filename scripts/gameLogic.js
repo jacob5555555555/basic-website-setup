@@ -61,16 +61,41 @@ define(["scripts/gameManager"], function(gameManager){
       solar:0
     };
 
+    /*
+    cost looks like
+    {
+      energy: 10, wood: 100
+    }
+    */
+    function makeButton(cost, action){
+      function canAfford(){
+        var canAfford = true;
+        for (var resource in cost){
+          if (gameState[resource] < cost[resource]){
+            canAfford = false;
+          }
+        }
+        return canAfford;
+      }
+      return {
+        callback: game.ifPlaying(function(){
+          if (canAfford()){
+            for (var resource in cost){
+              gameState[resource] -= cost[resource];
+            }
+            action();
+          }
+        }),
+        cost: cost,
+        canAfford: canAfford
+      };
+    }
+
 
     var buttons = {
-      hire_lumberjack: game.ifPlaying(function(){
-        if(gameState.energy>ljec){
-          gameState.lumberJacks++;
-        }
-      }),
-      fire_lumberjack: game.ifPlaying(function(){
-        gameState.lumberJacks--;
-      }),
+      hire_lumberjack: makeButton({energy: 5}, function(){gameState.lumberJacks++}),
+      fire_lumberjack: makeButton({lumberJacks: 1}, function(){}),
+      /*
       buy_furnace: game.ifPlaying(function(){
         if(gameState.energy>fuec){
           gameState.furnaces++;
@@ -129,11 +154,11 @@ define(["scripts/gameManager"], function(gameManager){
       destroy_solar: game.ifPlaying(function(){
         gameState.solar--;
       })
+      */
     }
 
-    left.onClicks(buttons);
-
     //actually running it
+    left.setup(buttons);
 
     function loop(){
       //logic
@@ -178,7 +203,9 @@ define(["scripts/gameManager"], function(gameManager){
       right.update(gameState,pomc);
       console.log(tf)
 
+      left.update();
     }
+
 
     game.runGame(loop);
   }

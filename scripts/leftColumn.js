@@ -1,18 +1,38 @@
-define(["scripts/libs/only"], function(only){
+define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   var html = only.html({div: []});
-  function leftColumn(buttonObject){
+  var buttonData = [];
+  function setup(buttonObject){
     var buttons = [];
     for (var key in buttonObject){
+      var description = buttonObject[key];
       var button = only.html({button: key, css: {display: "block"}});
-      button.addEventListener("click",buttonObject[key]);
-      buttons.push(button);
+      var div = htmlUtils.spacedColumns([
+        button,
+        {p: "Cost: " + JSON.stringify(description.cost)}
+      ], [.5, .5]);
+      button.addEventListener("click",description.callback);
+      buttons.push(div);
+      buttonData.push({
+        button: button, description: description
+      })
     }
     var final = only.html({div: buttons});
+    while(html.hasChildNodes()){
+      html.removeChild(html.firstChild);
+    }
     html.appendChild(final);
+  }
+
+  function update(){
+    for (var i = 0; i < buttonData.length; ++i){
+      var data = buttonData[i];
+      data.button.disabled = !data.description.canAfford();
+    }
   }
 
   return {
     html:html,
-    onClicks: leftColumn
+    setup: setup,
+    update: update
   }
 })
