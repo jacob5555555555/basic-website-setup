@@ -19,7 +19,8 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
 
         var categoryTitle = {
             "text-align" : "center",
-            "font-weight" : "bold"
+            "font-weight" : "bold",
+            "margin" : "1.5vh"
         };
 
         var myProgress = {
@@ -70,7 +71,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
             } else {
                 col1 = only.html({p: all[key] + ": ", css: {margin: "0px" }});
                 col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
-                    css: {margin: "0px" }});
+                    css: {margin: "0px", paddingBottom: "0px"}});
                 dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 for (var i = 0; i < categories.length; ++i) {
                     if (categoryStrings[i][key]) {
