@@ -78,11 +78,11 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       lumberJacks: {inputs: {energy: 1, trees: 5}, outputs: {wood:5}},
       furnaces: {inputs: {wood: 50}, outputs: {energy:50,pollution:1}},
       coalmines:{inputs: {energy: 10, coal: 10}, outputs: {coalreserves:10,pollution:5}},
-      coalplants:{inputs: {coalreserves:10}, outputs: {energy:50,pollution:10}},
+      coalplants:{inputs: {coalreserves:15}, outputs: {energy:500,pollution:10}},
       sawmills:{inputs: {trees:100,coalreserves:1}, outputs: {wood:100}},
-      oremines:{inputs: {ore:10, energy:50}, outputs: {orereserves:10,pollution:15}},
-      smelters:{inputs: {orereserves:10,coalreserves:5, energy:25}, outputs: {metal:10,pollution:25}},
-      solar: {inputs: {}, outputs: {energy:250}}
+      oremines:{inputs: {ore:10, energy:500}, outputs: {orereserves:10,pollution:15}},
+      smelters:{inputs: {orereserves:15,coalreserves:5, energy:25}, outputs: {metal:10,pollution:25}},
+      solar: {inputs: {}, outputs: {energy:2500}}
     }
 
     /*
@@ -143,7 +143,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     "Ore mine":  {description: makeButton({energy: 500000, wood: 200000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
     "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
     "Solar":  {description: makeButton({metal: 2000, energy:10000000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
-    "Sawmill":  {description: makeButton({metal: 20}, {sawmills: 1}), detail: "a sawmill to cut wood"}
+    "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"}
 
   }
 
