@@ -123,6 +123,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
 
     //actually running it
     left.setup(buttons);
+    title.setup(game);
 
     function logicmath(datum){
       var ed=0;

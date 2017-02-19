@@ -38,6 +38,14 @@ define(["scripts/libs/only"], function (only) {
         var resourceCollectors = ["lumberJacks", "coalmines", "oremines"];
         var outputMachines = ["furnaces","coalplants","smelters","solar"];
 
+        var outputs = {energy: "Energy", pollution: "Pollution"};
+        var naturalResources = {trees: "Trees", coalreserver: "Coal Reserves", orereserves: "Ore Reserves"};
+        var resourcesStockpiled = {wood: "Wood", coal: "Coal", ore: "Ore", metal: "Metal"};
+        var resourceCollectors = {lumberJacks: "LumberJacks", coalmines: "Coal Mines", oremines: "Ore Mines"};
+        var outputMachines = {furnaces: "Furnaces", coalplants: "Coal Plants", smelters: "Smelters", solar: "Solar Panels"};
+
+        var all = only.merge(outputs, naturalResources, resourcesStockpiled, resourceCollectors, outputMachines);
+
         var categoryStrings = [outputs, naturalResources, resourcesStockpiled, resourceCollectors, outputMachines];
 
         var categories = [[],[],[],[],[]];
@@ -50,19 +58,21 @@ define(["scripts/libs/only"], function (only) {
         for (var key in state) {
             var dat;
             if (key == "pollution") {
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")"});
+                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")",
+                  css: {margin: "0px"}});
                 categories[0].push(dat);
             }
             else if (key == "trees") {
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")"});
+                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")",
+                  css: {margin: "0px"}});
                 categories[1].push(dat);
             } else {
-                dat = only.html({p: key + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
+                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
                   css: {
                     margin: "0px"
                   }});
                 for (var i = 0; i < categories.length; ++i) {
-                    if (categoryStrings[i].indexOf(key) != -1) {
+                    if (categoryStrings[i][key]) {
                         categories[i].push(dat);
                     }
                 }

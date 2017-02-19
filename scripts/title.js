@@ -1,4 +1,4 @@
-define(["scripts/libs/only"], function (only) {
+define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
 
     var header = {
         "text-align": "center",
@@ -6,9 +6,9 @@ define(["scripts/libs/only"], function (only) {
         margin: "0px"
     };
 
-    var html = only.html({div: []});
     var timeTag = only.html({p: "Year: " + 1750, css: header});
-    html.appendChild(timeTag);
+    var pause = only.html({button: "Pause", class: "fancyButton"})
+    var html = htmlUtils.spacedColumns([pause, timeTag], [0.04, 0.96]);
 
     function title(state) {
 
@@ -18,7 +18,20 @@ define(["scripts/libs/only"], function (only) {
 
     }
 
+    function setup(game){
+      pause.addEventListener("click", function(){
+        if (game.isPaused()){
+          pause.innerText = "Pause";
+          game.setPaused(false);
+        } else {
+          pause.innerText = "Play";
+          game.setPaused(true);
+        }
+      })
+    }
+
     return {
+        setup: setup,
         html: html,
         update: title
     }

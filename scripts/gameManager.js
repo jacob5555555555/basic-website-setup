@@ -23,10 +23,14 @@ function makeGameManager(){
     function setPaused(isPaused){
       playing = !isPaused
     }
+    function isPaused(){
+      return !playing;
+    }
     return {
       ifPlaying: ifPlaying,
       runGame: runGame,
-      setPaused: setPaused
+      setPaused: setPaused,
+      isPaused: isPaused
     }
   }
 

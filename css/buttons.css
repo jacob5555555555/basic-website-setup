@@ -20,7 +20,7 @@
 	padding:6px 10px;
 	text-decoration:none;
 }
-.fancyButton:hover {
+.fancyButton:hover:enabled {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
 	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
 	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
@@ -33,6 +33,10 @@
 .fancyButton:active {
 	position:relative;
 	top:1px;
+}
+
+.fancyButton:disabled {
+	opacity: 0.5
 }
 
 p {
