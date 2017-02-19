@@ -104,7 +104,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     "Ore mine":  {description: makeButton({energy: 500000, wood: 200000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
     "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
     "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"},
-    "Solar":  {description: makeButton({metal: 2000, energy:10000000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
+    "Solar":  {description: makeButton({energy:10000000, metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
   }
 
   //actually running it
@@ -148,14 +148,18 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
   }
 
 
+  function calcPolution(){
+    return 1 - polsf / (gameState.pollution + polsf);
+  }
+
   function loop(){
     //logic
     logicmath(gameState);
     //update right
-    right.update(gameState,polsf);
+    right.update(gameState,calcPolution());
     title.update(gameState);
     left.update();
-    center.update(gameState);
+    center.update(gameState, calcPolution());
   }
 
 

@@ -88,7 +88,7 @@ define(["scripts/libs/only"], function(only){
     })
   }
 
-  function update(state) {
+  function update(state, pollution) {
     var height = canvas.parentNode.offsetHeight - 10;
     var width = canvas.parentNode.offsetWidth - 10;
     var better = Math.min(height, width);
@@ -107,7 +107,7 @@ define(["scripts/libs/only"], function(only){
     trees.setDensity(state.trees / 100000000);
     trees.draw();
 
-    fogs.setDensity(state.pollution / 300000);
+    fogs.setDensity(pollution);
     fogs.draw();
 
   }

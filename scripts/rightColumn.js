@@ -57,7 +57,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
 
             if (key == "pollution") {
                 col1 = only.html({p: all[key] + ": ", css: {margin: "0px"}});
-                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) ,
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(poln * 100) + "%" ,
                     css: {margin: "0px"}});
                 dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 categories[0].push(dat);
@@ -85,7 +85,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
                 categories[1].push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar));
             }
             else if (key == "pollution") {
-                barPercent = (1 - poln / (state[key] + poln ));
+                barPercent = (poln);
                 categories[0].push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar));
             }
 
