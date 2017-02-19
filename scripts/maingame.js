@@ -6,7 +6,7 @@ define(["scripts/libs/only","scripts/htmlUtils", "scripts/leftColumn","scripts/c
       var col3 = right;
 
       only.setHtml([
-        {title: "Sustainable NYUS"},
+        {title: "Natural Balance"},
           title,
         htmlUtils.spacedColumns([col1,col2,col3],[.33,.33,.33]),
         popups.html

@@ -20,7 +20,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
         var categoryTitle = {
             "text-align" : "center",
             "font-weight" : "bold",
-            "margin" : "1.5vh"
+            "margin" : "1vh"
         };
 
         var myProgress = {
