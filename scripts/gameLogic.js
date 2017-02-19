@@ -2,46 +2,6 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
 
   //static game logic
   function runLogic(title, right, left){
-    var ljec= 5;
-    var ljeu= 1;
-    var ljtu =5;
-    var tuwg=1;
-    var trgc = .0000000001;
-    var trmc = 100000000;
-    var fuec = 50;
-    var fueg = 1;
-    var fuwu = 100;
-    var fupg=1;
-    var podc=.001;
-    var pomc= 100000;
-    var cmec= 1000;
-    var cmwc=500;
-    var cmeu=50;
-    var cmcg=10;
-    var cmpg=2;
-    var cpec=2500;
-    var cpwc=1000;
-    var cpeg=10;
-    var cpcu=10;
-    var cppg =10;
-    var omec =5000;
-    var omwc = 2000;
-    var omeu = 100;
-    var omog =25;
-    var ompg =12;
-    var smec =10000;
-    var smwc =2500;
-    var smeu=100;
-    var smcu=5;
-    var smou=20;
-    var smmg =10;
-    var smpg=25;
-    var somc= 2000;
-    var soeg=1000;
-    var siwg=100;
-    var siec=10;
-    var sicu=5;
-    var tico=.01;
     var game = gameManager.makeGameManager();
 
     var gameState = {
@@ -143,9 +103,8 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     "Coal plant":  {description: makeButton({energy: 250000, wood: 100000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
     "Ore mine":  {description: makeButton({energy: 500000, wood: 200000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
     "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
-    "Solar":  {description: makeButton({metal: 2000, energy:10000000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
-    "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"}
-
+    "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"},
+    "Solar":  {description: makeButton({metal: 2000, energy:10000000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
   }
 
   //actually running it
@@ -193,7 +152,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     //logic
     logicmath(gameState);
     //update right
-    right.update(gameState,pomc);
+    right.update(gameState,polsf);
     title.update(gameState);
     left.update();
     center.update(gameState);
