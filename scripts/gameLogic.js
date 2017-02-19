@@ -59,8 +59,8 @@ define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(ga
       furnaces: 1 ,
       coalmines:0,
       coalplants:0,
-      sawmills:0,
       oremines:0,
+      sawmills:0,
       smelters:0,
       solar:0
     };
