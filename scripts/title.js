@@ -27,7 +27,6 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
       })
       pause.addEventListener("click", function(){
         if (!game.isPaused()){
-          pause.innerText = "Play";
           game.setPaused(true);
           popups.setPopup(resume);
         }
