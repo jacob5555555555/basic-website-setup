@@ -161,6 +161,9 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       datum.ore+=omd;
       datum.orereserves+=ord;
       datum.metal+=md;
+      for(key in datum){
+        datum[key]=Math.max(0,datum[key]);
+      }
     }
     function calc(stat){
       var state={};
