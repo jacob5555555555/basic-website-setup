@@ -1,7 +1,7 @@
 define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function makeButton(name, description,detail){
-    var button = only.html({button: name, css: {display: "block"}});
-    var subtract = only.html({button: "-"})
+    var button = only.html({button: name, css: {display: "block"}, class: "fancyButton"});
+    var subtract = only.html({button: "-", class: "fancyButton"})
     button.addEventListener("click",description.add);
     subtract.addEventListener("click", description.subtract);
     button.title=detail;

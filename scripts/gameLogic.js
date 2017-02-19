@@ -112,13 +112,13 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      hire_lumberjack: makeButton({energy: 5}, {lumberJacks: 1}),
-      buy_furnace: makeButton({energy: 50}, {furnaces: 1}),
-      buy_coalmine: makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
-      buy_coalplant: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
-      buy_oremine: makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
-      buy_smelter: makeButton({energy: 10000, wood:2500}, {smelters: 1}),
-      buy_solar: makeButton({metal: 2000}, {solar: 1})
+      "LumberJack": makeButton({energy: 5}, {lumberJacks: 1}),
+      "Furnace": makeButton({energy: 50}, {furnaces: 1}),
+      "Coal Mine": makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
+      "Coal Plant": makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
+      "Ore Mine": makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
+      "Smelter": makeButton({energy: 10000, wood:2500}, {smelters: 1}),
+      "Solar Panel": makeButton({metal: 2000}, {solar: 1})
     }
 
     //actually running it
