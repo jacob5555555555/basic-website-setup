@@ -8,7 +8,7 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
 
     var timeTag = only.html({p: "Year: " + 1750, css: header});
     var pause = only.html({button: "Pause", class: "fancyButton"})
-    var html = htmlUtils.spacedColumns([pause, timeTag], [0.04, 0.96]);
+    var html = htmlUtils.spacedColumns([pause, timeTag, {div: ""}], [0.04, 0.90, 0.06]);
 
     function title(state) {
 
