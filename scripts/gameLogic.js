@@ -92,7 +92,6 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
   }
   results is a similar object of what gets added
   */
-  var finalres={};
   function makeButton(cost, results){
     function canAdd(){
       for (var resource in cost){
@@ -178,7 +177,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       }
     }
     var tval =0.00000001 * datum.trees * ( 100000000*100000/(100000+datum.pollution) - datum.trees);
-    var pval =.0000001*datum.pollution;
+    var pval =.0001*datum.pollution;
     for(var d in deltas){
       datum[d]=deltas[d]+temset[d];
     }
@@ -188,25 +187,12 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
 
   }
 
-  function calc(stat){
-    var state={};
-    for( key in stat){
-      state[key]=stat[key];
-    }
-    for(var i =0;i<50000;i++){
-      logicmath(state)
-    }
-    return state;
-  }
 
   function loop(){
     //logic
     logicmath(gameState);
     //update right
-    if(gameState.time%20==0){
-      finalres= calc(gameState);
-    }
-    right.update(gameState,pomc,finalres);
+    right.update(gameState,pomc);
     title.update(gameState);
     left.update();
     center.update(gameState);

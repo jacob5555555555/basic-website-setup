@@ -14,7 +14,7 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
         return bar
     }
 
-    function rightColumn(state, poln,finstate) {
+    function rightColumn(state, poln) {
         var data = [];
 
         var categoryTitle = {
@@ -57,14 +57,14 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
 
             if (key == "pollution") {
                 col1 = only.html({p: all[key] + ": ", css: {margin: "0px"}});
-                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")",
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) ,
                     css: {margin: "0px"}});
                 dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 categories[0].push(dat);
             }
             else if (key == "trees") {
                 col1 = only.html({p: all[key] + ": ", css: {margin: "0px"}});
-                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")",
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) ,
                     css: {margin: "0px"}});
                 dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 categories[1].push(dat);
