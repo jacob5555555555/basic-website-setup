@@ -10,7 +10,7 @@ define(["scripts/libs/only"], function (only) {
         else {
             myBar.backgroundColor = postcolor;
         }
-        var bar = only.html({div: [{p: ""}, {div: [], css: myBar}], css: myProgress});
+        var bar = only.html({div: [{div: [], css: myBar}], css: myProgress});
         return bar
     }
 
@@ -28,20 +28,14 @@ define(["scripts/libs/only"], function (only) {
         };
         var myBar = {
             "width": "1%",
-            "height": "10px",
+            "height": "1vh",
             "background-color": "#4CAF50"
         };
-
-        var outputs = ["energy", "pollution"];
-        var naturalResources = ["trees", "coalreserves", "orereserves"];
-        var resourcesStockpiled = ["wood", "coal", "ore", "metal"];
-        var resourceCollectors = ["lumberjacks", "coalmines", "oremines","sawmills"];
-        var outputMachines = ["furnaces","coalplants","smelters","solar"];
 
         var outputs = {energy: "Energy", pollution: "Pollution"};
         var naturalResources = {trees: "Trees", coal: "Coal", ore: "Ore"};
         var resourcesStockpiled = {wood: "Wood", coalreserves: "Coal Reserves", orereserves: "Ore Reserves", metal: "Metal"};
-        var resourceCollectors = {lumberJacks: "LumberJacks", coalmines: "Coal Mines", oremines: "Ore Mines",sawmills: "Sawmill"};
+        var resourceCollectors = {lumberJacks: "Lumberjacks", coalmines: "Coal Mines", oremines: "Ore Mines", sawmills: "Saw Mills"};
         var outputMachines = {furnaces: "Furnaces", coalplants: "Coal Plants", smelters: "Smelters", solar: "Solar Panels"};
 
         var all = only.merge(outputs, naturalResources, resourcesStockpiled, resourceCollectors, outputMachines);
@@ -77,12 +71,9 @@ define(["scripts/libs/only"], function (only) {
                     }
                 }
             }
-            //   if(state[key]!=0 || key=="trees"){
-            //     data.push(dat);
-            // }
             var barPercent;
-            if (key == "trees") {
-                barPercent = (state[key]) / 100000000;
+            if (naturalResources[key]) {
+                barPercent = key == "trees" ? (state[key]) / 100000000 : (state[key]) / 250000;
                 categories[1].push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar));
             }
             if (key == "pollution") {
