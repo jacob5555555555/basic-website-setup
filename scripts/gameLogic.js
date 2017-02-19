@@ -72,6 +72,7 @@ define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(ga
     }
     results is a similar object of what gets added
     */
+    var finalres={};
     function makeButton(cost, results){
       function canAdd(){
         for (var resource in cost){
@@ -151,9 +152,9 @@ define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(ga
       var tf= tico*Math.pow(datum.time,1.25);
       var pb= pomc / (pomc+datum.pollution);
       pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
-      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw-cmw-cpw-omw-smw;
+      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw-cmw-cpw-omw-siw*siwg;
       ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-.01*(1-Math.pow(pb,.1))*datum.energy -siw*siec;
-      wd=ljw*ljtu-fuw;
+      wd=ljw*ljtu-fuw+siw*siwg;
       cmd=-cmw*cmcg;
       crd=cmw*cmcg-cpw-smcu*smw-sicu*siw;
       omd=-omog*omw;
@@ -178,7 +179,7 @@ define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(ga
       for( key in stat){
         state[key]=stat[key];
       }
-      for(var i =0;i<1000;i++){
+      for(var i =0;i<50000;i++){
         logicmath(state)
       }
       return state;
@@ -188,7 +189,9 @@ define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(ga
       //logic
       logicmath(gameState);
       //update right
-      var finalres= calc(gameState);
+      if(gameState.time%20==0){
+      finalres= calc(gameState);
+    }
       right.update(gameState,pomc,finalres);
       title.update(gameState);
       left.update();
