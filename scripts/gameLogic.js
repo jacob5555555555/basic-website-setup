@@ -112,13 +112,13 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      "Lumberjack": makeButton({energy: 5}, {lumberJacks: 1}),
-      "Furnace": makeButton({energy: 50}, {furnaces: 1}),
-      "Coal Mine": makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
-      "Coal Plant": makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
-      "Ore Mine": makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
-      "Smelter": makeButton({energy: 10000, wood:2500}, {smelters: 1}),
-      "Solar Panel": makeButton({metal: 2000}, {solar: 1})
+      "Lumberjack": {description: makeButton({energy: 5}, {lumberJacks: 1}),detail: "a lumberjack turns trees into logs"},
+      "Furnace": {description: makeButton({energy: 50}, {furnaces: 1}), detail: "a furnace turns logs into energy"},
+      "Coal mine":  {description: makeButton({energy: 1000, wood: 500}, {coalmines: 1}), detail: "a coal mine extracts coal from the earth"},
+      "Coal plant":  {description: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
+      "Ore mine":  {description: makeButton({energy: 5000, wood: 2000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
+      "Smelter":  {description: makeButton({energy: 10000, wood:2500}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
+      "Solar":  {description: makeButton({metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
     }
 
     //actually running it

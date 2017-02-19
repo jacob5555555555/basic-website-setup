@@ -32,9 +32,8 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function(only, htmlUtils){
   function setup(buttonObject){
     var buttons = [];
     for (var key in buttonObject){
-      var description = buttonObject[key];
-      //var detail = buttonObject[key].detail;
-      var detail = "Either robby forgot to upload the tooltip text or someone deleted it, thats what was causing the error"
+      var description = buttonObject[key].description;
+      var detail = buttonObject[key].detail;
       var data = makeButton(key, description,detail);
       buttons.push(data.html);
       buttonData.push(data)
