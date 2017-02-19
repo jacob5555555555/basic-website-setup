@@ -38,6 +38,9 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var smpg=25;
     var somc= 2000;
     var soeg=1000;
+    var siwg=100;
+    var siec=10;
+    var sicu=5;
     var tico=.01;
     var game = gameManager.makeGameManager();
 
@@ -45,17 +48,18 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       pollution: 0,
       energy: 100,
       trees: 100000000,
-      coal: 100000,
-      ore: 100000,
+      coal: 250000,
+      ore: 250000,
       wood: 0,
-      coalreserves:0,
-      orereserves:0,
+      coalreserves: 0,
+      orereserves: 0,
       metal:0,
       time:0,
       lumberJacks: 25,
       furnaces: 1 ,
       coalmines:0,
       coalplants:0,
+      sawmills:0,
       oremines:0,
       smelters:0,
       solar:0
@@ -118,7 +122,9 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       "Coal plant":  {description: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
       "Ore mine":  {description: makeButton({energy: 5000, wood: 2000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
       "Smelter":  {description: makeButton({energy: 10000, wood:2500}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
-      "Solar":  {description: makeButton({metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
+      "Solar":  {description: makeButton({metal: 2000, energy:100000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
+      "Sawmill":  {description: makeButton({metal: 20}, {sawmills: 1}), detail: "a sawmill to cut wood"}
+
     }
 
     //actually running it
@@ -136,6 +142,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       var omd=0;
       var ord=0;
       var ljw = Math.min(datum.trees,datum.lumberJacks*ljtu)/ljtu;
+      var siw = Math.min(datum.trees,Math.min(datum.coalreserves,datum.sawmills*sicu)*siwg/sicu)/siwg;
       var fuw = Math.min(datum.wood,datum.furnaces*fuwu);
       var cmw = Math.min(datum.coal,datum.coalmines*cmcg)/cmcg;
       var cpw = Math.min(datum.coalreserves,datum.coalplants*cpcu);
@@ -144,11 +151,11 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       var tf= tico*Math.pow(datum.time,1.25);
       var pb= pomc / (pomc+datum.pollution);
       pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
-      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw;
-      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-(1-Math.pow(pb,.1))*datum.energy;
+      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw-cmw-cpw-omw-smw;
+      ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-.01*(1-Math.pow(pb,.1))*datum.energy -siw*siec;
       wd=ljw*ljtu-fuw;
       cmd=-cmw*cmcg;
-      crd=cmw*cmcg-cpw-smcu*smw;
+      crd=cmw*cmcg-cpw-smcu*smw-sicu*siw;
       omd=-omog*omw;
       ord=omog*omw- smou*smw;
       md= smw*smmg;
@@ -171,7 +178,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       for( key in stat){
         state[key]=stat[key];
       }
-      for(var i =0;i<50000;i++){
+      for(var i =0;i<1000;i++){
         logicmath(state)
       }
       return state;
