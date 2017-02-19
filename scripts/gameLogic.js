@@ -133,6 +133,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     };
   }
   var polsf=100000;
+  var poldec=.01;
   var buttons = {
 
 
@@ -177,7 +178,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       }
     }
     var tval =0.00000001 * datum.trees * ( 100000000*polsf/(polsf+datum.pollution) - datum.trees);
-    var pval =.0001*datum.pollution;
+    var pval =poldec*datum.pollution;
     for(var d in deltas){
       datum[d]=deltas[d]+temset[d];
     }
