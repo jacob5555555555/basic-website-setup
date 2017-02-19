@@ -1,4 +1,4 @@
-define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (only, htmlUtils, popups) {
+define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups", "scripts/gameLogic"], function (only, htmlUtils, popups, gameLogic) {
 
     var header = {
         "text-align": "center",
@@ -8,8 +8,9 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
 
     var timeTag = only.html({p: "Year: " + 1750, css: header});
     var pause = only.html({button: "Pause", class: "fancyButton"});
+    var saveLoad = only.html({button: "Save / Load", class: "fancyButton"});
     var about = only.html({button: "About", class: "fancyButton"})
-    var html = htmlUtils.spacedColumns([pause, timeTag, about], [0.05, 0.90, 0.05]);
+    var html = htmlUtils.spacedColumns([pause, saveLoad, timeTag, {div: ""},  about], [0.05, 0.1, 0.75, 0.15, 0.05]);
 
     function title(state) {
 
@@ -20,7 +21,7 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
     }
 
 
-    function setup(game){
+    function setup(game, getGameState, setGameState){
       var resume = only.html({button: "Resume", class: "fancyButton"});
       resume.addEventListener("click", function(){
         game.setPaused(false);
@@ -66,6 +67,31 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
           resume
         ]})
         popups.setPopup(text);
+      })
+      saveLoad.addEventListener("click", function(){
+        game.setPaused(true);
+        var input = only.html({input: ""});
+        var load = only.html({button: "Load", class: "fancyButton"});
+        load.addEventListener("click", function(){
+          var state = JSON.parse(input.value);
+          setGameState(state);
+          popups.removePopup();
+          game.setPaused(false);
+        });
+        var div = only.html({div: [
+          {div: [
+            {p: "You can save your progress by copying this text, and load later by pasting it in"},
+            {p: "Copy this text to save game:"},
+            {textarea: JSON.stringify(getGameState())},
+            {p: "Paste here to load a game:"},
+            input,
+            load
+          ], css: {
+            background: "white", border: "solid black 1px"
+          }},
+          resume
+        ]});
+        popups.setPopup(div);
       })
     }
 

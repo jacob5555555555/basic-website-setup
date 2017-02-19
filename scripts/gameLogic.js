@@ -114,9 +114,16 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
 
   }
 
+  function getGameState(){
+    return gameState;
+  }
+  function setGameState(state){
+    gameState = state;
+  }
+
   //actually running it
   left.setup(buttons);
-  title.setup(game);
+  title.setup(game, getGameState, setGameState);
   function logicmath(datum){
     var deltas={};
     var temset={};
@@ -168,7 +175,6 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     left.update();
     center.update(gameState, calcPolution());
   }
-
 
   game.runGame(loop);
 }
