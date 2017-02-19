@@ -112,17 +112,18 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      hire_lumberjack: {description: makeButton({energy: 5}, {lumberJacks: 1}),detail: "a lumberjack turns trees into logs"},
-      buy_furnace: {description: makeButton({energy: 50}, {furnaces: 1}), detail: "a furnace turns logs into energy"},
-      buy_coalmine:  {description: makeButton({energy: 1000, wood: 500}, {coalmines: 1}), detail: "a coal mine extracts coal from the earth"},
-      buy_coalplant:  {description: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
-      buy_oremine:  {description: makeButton({energy: 5000, wood: 2000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
-      buy_smelter:  {description: makeButton({energy: 10000, wood:2500}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
-      buy_solar:  {description: makeButton({metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
+      "Lumberjack": makeButton({energy: 5}, {lumberJacks: 1}),
+      "Furnace": makeButton({energy: 50}, {furnaces: 1}),
+      "Coal Mine": makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
+      "Coal Plant": makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),
+      "Ore Mine": makeButton({energy: 5000, wood: 2000}, {oremines: 1}),
+      "Smelter": makeButton({energy: 10000, wood:2500}, {smelters: 1}),
+      "Solar Panel": makeButton({metal: 2000}, {solar: 1})
     }
 
     //actually running it
     left.setup(buttons);
+    title.setup(game);
 
     function logicmath(datum){
       var ed=0;
@@ -184,7 +185,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       right.update(gameState,pomc,finalres);
       title.update(gameState);
       left.update();
-      center.update();
+      center.update(gameState);
     }
 
 

@@ -9,6 +9,7 @@ define(["scripts/libs/only","scripts/htmlUtils", "scripts/leftColumn","scripts/c
         title,
       htmlUtils.spacedColumns([col1,col2,col3],[.33,.33,.33])
     ])
+    document.body.style.backgroundColor = "#FFFFC0";
   }
 
   return {
