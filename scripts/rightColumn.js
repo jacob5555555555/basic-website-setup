@@ -35,13 +35,13 @@ define(["scripts/libs/only"], function (only) {
         var outputs = ["energy", "pollution"];
         var naturalResources = ["trees", "coalreserves", "orereserves"];
         var resourcesStockpiled = ["wood", "coal", "ore", "metal"];
-        var resourceCollectors = ["lumberjacks", "coalmines", "oremines"];
+        var resourceCollectors = ["lumberjacks", "coalmines", "oremines","sawmills"];
         var outputMachines = ["furnaces","coalplants","smelters","solar"];
 
         var outputs = {energy: "Energy", pollution: "Pollution"};
-        var naturalResources = {trees: "Trees", coalreserves: "Coal Reserves", orereserves: "Ore Reserves"};
-        var resourcesStockpiled = {wood: "Wood", coal: "Coal", ore: "Ore", metal: "Metal"};
-        var resourceCollectors = {lumberJacks: "LumberJacks", coalmines: "Coal Mines", oremines: "Ore Mines"};
+        var naturalResources = {trees: "Trees", coal: "Coal", ore: "Ore"};
+        var resourcesStockpiled = {wood: "Wood", coalreserves: "Coal Reserves", orereserves: "Ore Reserves", metal: "Metal"};
+        var resourceCollectors = {lumberJacks: "LumberJacks", coalmines: "Coal Mines", oremines: "Ore Mines",Sawmill: "Sawmill"};
         var outputMachines = {furnaces: "Furnaces", coalplants: "Coal Plants", smelters: "Smelters", solar: "Solar Panels"};
 
         var all = only.merge(outputs, naturalResources, resourcesStockpiled, resourceCollectors, outputMachines);
