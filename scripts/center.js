@@ -1,13 +1,42 @@
 define(["scripts/libs/only"], function(only){
   //html pieces
   //var earth = only.html({img: "", src: "images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"});
-var earth = only.html({img: "", src: "images/world.png"});
+  var earth = only.html({img: "", src: "images/world.png"});
   var tree = only.html({img: "", src: "images/tree.png"})
+  var fog = only.html({img: "", src: "images/fog.png"})
 
   var canvas = only.html({canvas: ""});
   var ctx = canvas.getContext("2d");
 
-  function makeSpriteDrawer(image, maximum){
+  function makeDistributedSpriteDrawer(image, maximum){
+    var count = 0;
+    var locations = [];
+
+    return {
+      setDensity: function(density){
+        count = Math.ceil(density * maximum);
+        if (count < locations.length){
+          locations = locations.slice(0, count);
+        } else if (count > locations.length){
+          for (var i = 0; i < (count - locations.length); ++i){
+            locations.push({
+              x: Math.random() * .8 + .1,
+              y: Math.random() * .8 + .1
+            });
+          }
+        }
+      },
+      draw: function(){
+        locations.forEach(function(loc){
+          drawImage(image, {
+            angle: 0, x: loc.x, y: loc.y, height: .3, width: .3
+          });
+        })
+      }
+    }
+  }
+
+  function makeRotateSpriteDrawer(image, maximum){
     var count = 0;
     var locations = [];
 
@@ -29,7 +58,8 @@ var earth = only.html({img: "", src: "images/world.png"});
       }
     }
   }
-  var trees = makeSpriteDrawer(tree, 20);
+  var trees = makeRotateSpriteDrawer(tree, 20);
+  var fogs = makeDistributedSpriteDrawer(fog, 15);
 
   /*dimentions looks like:
   {x: centerX, y: centerY, width: proportionWidth, height: proportionHeight, angle: angle}*/
@@ -76,6 +106,9 @@ var earth = only.html({img: "", src: "images/world.png"});
 
     trees.setDensity(state.trees / 100000000);
     trees.draw();
+
+    fogs.setDensity(state.pollution / 10000);
+    fogs.draw();
 
   }
   return {
