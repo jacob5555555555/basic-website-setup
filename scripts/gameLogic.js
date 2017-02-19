@@ -1,4 +1,4 @@
-define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
+define(["scripts/gameManager", "scripts/center", "scripts/endGame"], function(gameManager, center, endGame){
 
   //static game logic
   function runLogic(title, right, left){
@@ -193,6 +193,11 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       title.update(gameState);
       left.update();
       center.update(gameState);
+
+      if (gameState.energy <= 0){
+        game.setPaused(true);
+        endGame.gameOver();
+      }
     }
 
 

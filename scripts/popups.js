@@ -34,7 +34,6 @@ define(["scripts/libs/only"], function(only){
     overlay.style.visibility = "hidden";
   }
 
-
   return {
     html: overlay,
     setPopup: setPopup,
