@@ -67,8 +67,7 @@ var earth = only.html({img: "", src: "images/world.png"});
       canvas.width = better;
     }
     //ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.fillStyle = "#FFFFC0";
-    console.log(ctx.fillStyle)
+    ctx.fillStyle = "#FFFFD0";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     drawImage(earth, {
