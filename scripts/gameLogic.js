@@ -22,7 +22,9 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       sawmills:0,
       oremines:0,
       smelters:0,
-      solar:0
+      solar:0,
+      nasa:0,
+      miner:0
     };
     var things = {
       pollution: {inputs: {}, outputs: {}},
@@ -42,7 +44,10 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       sawmills:{inputs: {trees:100,coalreserves:1}, outputs: {wood:100}},
       oremines:{inputs: {ore:10, energy:500}, outputs: {orereserves:10,pollution:15}},
       smelters:{inputs: {orereserves:15,coalreserves:5, energy:25}, outputs: {metal:10,pollution:25}},
-      solar: {inputs: {}, outputs: {energy:2500}}
+      solar: {inputs: {}, outputs: {energy:2500}},
+      nasa: {inputs: {lumberJacks:1, metal:100}, outputs: {miner:1}},
+      miner: {inputs: {energy:1000}, outputs: {coal:1,metal:2}}
+
     }
 
     /*
@@ -104,7 +109,9 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     "Ore mine":  {description: makeButton({energy: 500000, wood: 200000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
     "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
     "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"},
-    "Solar":  {description: makeButton({energy:10000000, metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"}
+    "Solar":  {description: makeButton({energy:10000000, metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
+    "NASA!":  {description: makeButton({energy:1000000, metal: 10000}, {nasa: 1}), detail: "nasa"}
+
   }
 
   //actually running it
