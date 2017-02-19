@@ -1,4 +1,4 @@
-define(["scripts/libs/only"], function (only) {
+define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
     var html = only.html({div: []});
 
     function makeProgessBar(value, threshold, precolor, postcolor, myProgress, myBar) {
@@ -19,7 +19,8 @@ define(["scripts/libs/only"], function (only) {
 
         var categoryTitle = {
             "text-align" : "center",
-            "font-weight" : "bold"
+            "font-weight" : "bold",
+            "margin" : "1.5vh"
         };
 
         var myProgress = {
@@ -50,21 +51,28 @@ define(["scripts/libs/only"], function (only) {
         categories[4].push({p : "Output Machines", css: categoryTitle});
 
         for (var key in state) {
+            var col1;
+            var col2;
             var dat;
+
             if (key == "pollution") {
-                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")",
-                  css: {margin: "0px"}});
+                col1 = only.html({p: all[key] + ": ", css: {margin: "0px"}});
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (state[key] + poln )) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 4}).format(1 - poln / (finstate[key] + poln )) + ")",
+                    css: {margin: "0px"}});
+                dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 categories[0].push(dat);
             }
             else if (key == "trees") {
-                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")",
-                  css: {margin: "0px"}});
+                col1 = only.html({p: all[key] + ": ", css: {margin: "0px"}});
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]) + "(" + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(finstate[key]) + ")",
+                    css: {margin: "0px"}});
+                dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 categories[1].push(dat);
             } else {
-                dat = only.html({p: all[key] + ": " + new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
-                  css: {
-                    margin: "0px"
-                  }});
+                col1 = only.html({p: all[key] + ": ", css: {margin: "0px" }});
+                col2 = only.html({p: new Intl.NumberFormat('en-US', {maximumFractionDigits: 0}).format(state[key]),
+                    css: {margin: "0px", paddingBottom: "0px"}});
+                dat = htmlUtils.spacedColumns([col1,col2],[.5,.5]);
                 for (var i = 0; i < categories.length; ++i) {
                     if (categoryStrings[i][key]) {
                         categories[i].push(dat);
@@ -76,7 +84,7 @@ define(["scripts/libs/only"], function (only) {
                 barPercent = key == "trees" ? (state[key]) / 100000000 : (state[key]) / 250000;
                 categories[1].push(makeProgessBar(barPercent, 25, "#ff0000", "#4CAF50", myProgress, myBar));
             }
-            if (key == "pollution") {
+            else if (key == "pollution") {
                 barPercent = (1 - poln / (state[key] + poln ));
                 categories[0].push(makeProgessBar(barPercent, 50, "#4CAF50", "#785027", myProgress, myBar));
             }
