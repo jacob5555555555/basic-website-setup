@@ -62,17 +62,7 @@ define(["scripts/gameManager", "scripts/center"], function (gameManager, center)
             sawmills: 0,
             oremines: 0,
             smelters: 0,
-            solar: 0,
-
-            ed: 0,
-            td: 0,
-            wd: 0,
-            pd: 0,
-            cmd: 0,
-            crd: 0,
-            md: 0,
-            omd: 0,
-            ord: 0
+            solar: 0
         };
 
         /*

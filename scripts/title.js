@@ -2,7 +2,7 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
 
     var header = {
         "text-align": "center",
-        "font-size": "30px",
+        "font-size": "25px",
         margin: "0px"
     };
 
