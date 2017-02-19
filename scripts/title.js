@@ -60,7 +60,8 @@ define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (o
         var text = only.html({div: [
           {div: paragraphs, css: {
             background: "white",
-            border: "solid black 1px"
+            border: "solid black 1px",
+            marginBottom: "10px"
           }},
           resume
         ]})
