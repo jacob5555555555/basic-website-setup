@@ -117,13 +117,13 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      "Lumberjack": {description: makeButton({energy: 5}, {lumberJacks: 1}),detail: "a lumberjack turns trees into logs"},
-      "Furnace": {description: makeButton({energy: 50}, {furnaces: 1}), detail: "a furnace turns logs into energy"},
-      "Coal mine":  {description: makeButton({energy: 1000, wood: 500}, {coalmines: 1}), detail: "a coal mine extracts coal from the earth"},
-      "Coal plant":  {description: makeButton({energy: 2500, wood: 1000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
-      "Ore mine":  {description: makeButton({energy: 5000, wood: 2000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
-      "Smelter":  {description: makeButton({energy: 10000, wood:2500}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
-      "Solar":  {description: makeButton({metal: 2000, energy:100000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
+      "Lumberjack": {description: makeButton({energy: 500}, {lumberJacks: 1}),detail: "a lumberjack turns trees into logs"},
+      "Furnace": {description: makeButton({energy: 5000}, {furnaces: 1}), detail: "a furnace turns logs into energy"},
+      "Coal mine":  {description: makeButton({energy: 100000, wood: 50000}, {coalmines: 1}), detail: "a coal mine extracts coal from the earth"},
+      "Coal plant":  {description: makeButton({energy: 250000, wood: 100000}, {coalplants: 1}), detail: "a coal plant turns liberated coal into energy"},
+      "Ore mine":  {description: makeButton({energy: 500000, wood: 200000}, {oremines: 1}), detail: "a ore mine extracts ore from the ground"},
+      "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
+      "Solar":  {description: makeButton({metal: 2000, energy:10000000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
       "Sawmill":  {description: makeButton({metal: 20}, {sawmills: 1}), detail: "a sawmill to cut wood"}
 
     }
