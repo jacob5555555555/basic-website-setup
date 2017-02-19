@@ -46,7 +46,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       smelters:{inputs: {orereserves:15,coalreserves:5, energy:25}, outputs: {metal:10,pollution:25}},
       solar: {inputs: {}, outputs: {energy:2500}},
       nasa: {inputs: {lumberJacks:1, metal:100}, outputs: {miner:1}},
-      miner: {inputs: {energy:1000}, outputs: {coalreserves:1,ore:2}}
+      miner: {inputs: {energy:5}, outputs: {coalreserves:3}}
 
     }
 
