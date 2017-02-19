@@ -152,7 +152,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       var tf= tico*Math.pow(datum.time,1.25);
       var pb= pomc / (pomc+datum.pollution);
       pd= datum.coalmines*cmpg + datum.coalplants*cppg+ datum.furnaces*fupg +datum.oremines*ompg+ datum.smelters*smpg- podc*datum.pollution;
-      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw-cmw-cpw-omw-siw*siwg;
+      td=trgc*datum.trees*( trmc*pb -datum.trees)-ljw-siw*siwg;
       ed = fuw*fueg+cpw*cpeg+soeg*datum.solar*pb*pb-ljw*ljeu-cmw*cmeu-omw*omeu-smw*smeu-.01*(1-Math.pow(pb,.1))*datum.energy -siw*siec;
       wd=ljw*ljtu-fuw+siw*siwg;
       cmd=-cmw*cmcg;
