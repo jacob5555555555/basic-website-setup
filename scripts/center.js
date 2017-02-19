@@ -1,6 +1,7 @@
 define(["scripts/libs/only"], function(only){
   //html pieces
-  var earth = only.html({img: "", src: "images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"});
+  //var earth = only.html({img: "", src: "images/world_map_round_sticker-rb9b44a9415d4402691baa75521f6214d_v9waf_8byvr_512.jpg"});
+var earth = only.html({img: "", src: "images/world.png"});
   var tree = only.html({img: "", src: "images/tree.png"})
 
   var canvas = only.html({canvas: ""});
@@ -65,7 +66,10 @@ define(["scripts/libs/only"], function(only){
       canvas.height = better;
       canvas.width = better;
     }
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    //ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.fillStyle = "#FFFFC0";
+    console.log(ctx.fillStyle)
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
     drawImage(earth, {
       x: .5, y:.5, width: 1, height: 1, angle: 0

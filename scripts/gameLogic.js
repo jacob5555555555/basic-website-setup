@@ -112,7 +112,7 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     var buttons = {
 
 
-      "LumberJack": makeButton({energy: 5}, {lumberJacks: 1}),
+      "Lumberjack": makeButton({energy: 5}, {lumberJacks: 1}),
       "Furnace": makeButton({energy: 50}, {furnaces: 1}),
       "Coal Mine": makeButton({energy: 1000, wood: 500}, {coalmines: 1}),
       "Coal Plant": makeButton({energy: 2500, wood: 1000}, {coalplants: 1}),

@@ -35,7 +35,7 @@ define(["scripts/libs/only"], function (only) {
         var outputs = ["energy", "pollution"];
         var naturalResources = ["trees", "coalreserves", "orereserves"];
         var resourcesStockpiled = ["wood", "coal", "ore", "metal"];
-        var resourceCollectors = ["lumberJacks", "coalmines", "oremines"];
+        var resourceCollectors = ["lumberjacks", "coalmines", "oremines"];
         var outputMachines = ["furnaces","coalplants","smelters","solar"];
 
         var outputs = {energy: "Energy", pollution: "Pollution"};
