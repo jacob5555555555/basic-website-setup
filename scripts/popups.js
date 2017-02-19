@@ -1,6 +1,6 @@
 define(["scripts/libs/only"], function(only){
 
-  var overlay = only.html({
+  var greyedOut = only.html({
     center: [],
     css: {
       position: 'fixed',
@@ -10,6 +10,18 @@ define(["scripts/libs/only"], function(only){
       top: 0,
       left: 0,
       opacity: 0.85,
+      zIndex: 10
+    }
+  });
+
+  var overlay = only.html({
+    center: [greyedOut],
+    css: {
+      position: 'fixed',
+      width: '100%',
+      height: '100%',
+      top: 0,
+      left: 0,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -24,8 +36,10 @@ define(["scripts/libs/only"], function(only){
   }
 
   function setPopup(html){
+    html.style.zIndex = 20;
     removeChildren();
     overlay.appendChild(html);
+    overlay.appendChild(greyedOut);
     overlay.style.visibility = "visible";
   }
 
