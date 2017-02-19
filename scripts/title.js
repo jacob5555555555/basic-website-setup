@@ -1,4 +1,4 @@
-define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
+define(["scripts/libs/only", "scripts/htmlUtils", "scripts/popups"], function (only, htmlUtils, popups) {
 
     var header = {
         "text-align": "center",
@@ -18,14 +18,18 @@ define(["scripts/libs/only", "scripts/htmlUtils"], function (only, htmlUtils) {
 
     }
 
+
     function setup(game){
+      var resume = only.html({button: "Resume", class: "fancyButton"});
+      resume.addEventListener("click", function(){
+        game.setPaused(false);
+        popups.removePopup();
+      })
       pause.addEventListener("click", function(){
-        if (game.isPaused()){
-          pause.innerText = "Pause";
-          game.setPaused(false);
-        } else {
+        if (!game.isPaused()){
           pause.innerText = "Play";
           game.setPaused(true);
+          popups.setPopup(resume);
         }
       })
     }
