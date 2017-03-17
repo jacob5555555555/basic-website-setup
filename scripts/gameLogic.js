@@ -24,7 +24,8 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       smelters:0,
       solar:0,
       nasa:0,
-      miner:0
+      miner:0,
+      charcoal:0
     };
     var things = {
       pollution: {inputs: {}, outputs: {}},
@@ -37,16 +38,17 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
       orereserves:  {inputs: {}, outputs: {}},
       metal: {inputs: {}, outputs: {}},
       time: {inputs: {}, outputs: {}},
+      charcoal: {inputs: {energy:100, wood:1000}, outputs: {coalreserves:5,pollution:5}},
       lumberJacks: {inputs: {energy: 1, trees: 5}, outputs: {wood:5}},
       furnaces: {inputs: {wood: 50}, outputs: {energy:50,pollution:1}},
-      coalmines:{inputs: {energy: 10, coal: 10}, outputs: {coalreserves:10,pollution:5}},
-      coalplants:{inputs: {coalreserves:15}, outputs: {energy:500,pollution:10}},
+      coalmines:{inputs: {energy: 10, coal: 10, wood: 10}, outputs: {coalreserves:10,pollution:5}},
+      coalplants:{inputs: {coalreserves:15, wood: 15}, outputs: {energy:500,pollution:10}},
       sawmills:{inputs: {trees:100,coalreserves:1}, outputs: {wood:100}},
-      oremines:{inputs: {ore:10, energy:500}, outputs: {orereserves:10,pollution:15}},
-      smelters:{inputs: {orereserves:15,coalreserves:5, energy:25}, outputs: {metal:10,pollution:25}},
+      oremines:{inputs: {ore:10, energy:500, wood:100}, outputs: {orereserves:10,pollution:15}},
+      smelters:{inputs: {orereserves:15,coalreserves:5, energy:25, wood:250}, outputs: {metal:10,pollution:25}},
       solar: {inputs: {}, outputs: {energy:2500}},
       nasa: {inputs: {lumberJacks:1, metal:100}, outputs: {miner:1}},
-      miner: {inputs: {energy:5}, outputs: {coalreserves:3}}
+      miner: {inputs: {energy:5}, outputs: { orereserves:1}}
 
     }
 
@@ -110,7 +112,8 @@ define(["scripts/gameManager", "scripts/center"], function(gameManager, center){
     "Smelter":  {description: makeButton({energy: 1000000, wood:250000}, {smelters: 1}), detail: "a smelter turns ore and coal into metal"},
     "Sawmill":  {description: makeButton({wood: 20000}, {sawmills: 1}), detail: "a sawmill to cut wood"},
     "Solar":  {description: makeButton({energy:10000000, metal: 2000}, {solar: 1}), detail: "a solar panel harnesses the energy of the sun"},
-    "NASA!":  {description: makeButton({energy:1000000, metal: 10000}, {nasa: 1}), detail: "nasa"}
+    "NASA!":  {description: makeButton({energy:1000000, metal: 10000}, {nasa: 1}), detail: "nasa"},
+    "Charcoal":  {description: makeButton({wood:100000}, {charcoal: 1}), detail: "nasa"}
 
   }
 
